@@ -1,7 +1,7 @@
 .idea/
 .vscode/
-mariadb/data/
-redis/data/
+backend/mariadb/data/
+backend/redis/data/
 caddy/data/
 caddy/config/
 caddy/site/

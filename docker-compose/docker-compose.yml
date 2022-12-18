@@ -33,20 +33,20 @@ services:
       - "app.jar"
   redis:
     build:
-      context: ../redis
+      context: ../backend/redis
       dockerfile: Dockerfile
     volumes:
-      - ../redis/data:/data
+      - ../backend/redis/data:/data
     ports:
       - "6379:6379"
     restart: always
   mariadb:
     image: mariadb:10.6
     volumes:
-      - ../mariadb/conf.d:/etc/mysql/conf.d
-      - ../mariadb/data:/var/lib/mysql
-      - ../mariadb/initdb.d:/docker-entrypoint-initdb.d
-    env_file: ../mariadb/.env
+      - ../backend/mariadb/conf.d:/etc/mysql/conf.d
+      - ../backend/mariadb/data:/var/lib/mysql
+      - ../backend/mariadb/initdb.d:/docker-entrypoint-initdb.d
+    env_file: ../backend/mariadb/.env
     environment:
       TZ: Asia/Seoul
     ports:
