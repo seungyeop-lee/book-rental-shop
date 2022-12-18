@@ -1,1 +1,1 @@
-CREATE DATABASE spring_dev;
+CREATE DATABASE backoffice;

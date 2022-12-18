@@ -9,14 +9,14 @@ global:
       - "bash cmd.sh down"
 watchTargets:
   # spring
-  - path: "spring_dev/src/main"
+  - path: "backend/backoffice/src/main"
     lifeCycle:
       onChange:
-        - dir: "spring_dev"
+        - dir: "backend/backoffice"
           cmd: "bash cmd.sh build update"
     option:
       excludeDir:
-        - "spring_dev/src/main/generated"
+        - "backend/backoffice/src/main/generated"
       waitMillisecond: 1000
   # react
   - path: 'frontend/backoffice'

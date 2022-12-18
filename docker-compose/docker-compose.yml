@@ -12,9 +12,9 @@ services:
       - ../caddy/config:/config
     command: caddy run -watch -config /etc/caddy/Caddyfile
     restart: on-failure
-  spring_dev:
+  backend_backoffice:
     build:
-      context: ../spring_dev
+      context: ../backend/backoffice
       dockerfile: run-bootJar.Dockerfile
     ports:
       - "8080:8080"

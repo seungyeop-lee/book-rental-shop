@@ -10,7 +10,7 @@ function runCommand() {
 
   # up
   elif [ "$1" = "up" ]; then
-    (cd spring_dev && bash cmd.sh build)
+    (cd backend/backoffice && bash cmd.sh build)
     (cd frontend/backoffice && bash cmd.sh build)
     (cd $docker_compose_dir && docker compose up -d --build)
 
