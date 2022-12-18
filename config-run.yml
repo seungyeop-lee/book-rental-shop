@@ -1,0 +1,6 @@
+global:
+  lifeCycle:
+    onStartWatch:
+      - "bash cmd.sh up"
+    onFinishWatch:
+      - "bash cmd.sh down"

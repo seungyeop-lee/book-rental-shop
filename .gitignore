@@ -1,0 +1,7 @@
+.idea/
+.vscode/
+mariadb/data/
+redis/data/
+caddy/data/
+caddy/config/
+caddy/site/

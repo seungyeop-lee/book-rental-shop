@@ -1,0 +1,69 @@
+version: '3'
+services:
+  caddy:
+    image: caddy:2-alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ../caddy/Caddyfile:/etc/caddy/Caddyfile
+      - ../caddy/site:/srv
+      - ../caddy/data:/data
+      - ../caddy/config:/config
+    command: caddy run -watch -config /etc/caddy/Caddyfile
+    restart: on-failure
+  spring_dev:
+    build:
+      context: ../spring_dev
+      dockerfile: run-bootJar.Dockerfile
+    ports:
+      - "8080:8080"
+      - "5005:5005"
+    working_dir: "/app"
+    entrypoint:
+      - "./wait-for-it.sh"
+      - "mariadb:3306"
+      - "-t"
+      - "0"
+      - "--"
+      - "java"
+      - "-jar"
+      - "-Dspring.profiles.active=default"
+      - "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
+      - "app.jar"
+  redis:
+    build:
+      context: ../redis
+      dockerfile: Dockerfile
+    volumes:
+      - ../redis/data:/data
+    ports:
+      - "6379:6379"
+    restart: always
+  mariadb:
+    image: mariadb:10.6
+    volumes:
+      - ../mariadb/conf.d:/etc/mysql/conf.d
+      - ../mariadb/data:/var/lib/mysql
+      - ../mariadb/initdb.d:/docker-entrypoint-initdb.d
+    env_file: ../mariadb/.env
+    environment:
+      TZ: Asia/Seoul
+    ports:
+      - "3306:3306"
+    restart: always
+  react_dev:
+    build:
+      context: ../react_dev
+      dockerfile: deploy-dist.Dockerfile
+    ports:
+      - "8081:80"
+    restart: unless-stopped
+  go_dev:
+    build:
+      context: ../go_dev
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8080"
+      - "2345:2345"
+    restart: unless-stopped
