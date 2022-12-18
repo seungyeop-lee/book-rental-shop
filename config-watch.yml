@@ -34,15 +34,3 @@ watchTargets:
           cmd: "bash cmd.sh update"
     option:
       waitMillisecond: 1000 # default 100
-  # golang
-  - path: "go_dev"
-    lifeCycle:
-      onChange:
-        - "bash cmd.sh build update"
-    option:
-      excludeDir:
-        - "go_dev/build"
-      excludeSuffix:
-        - "_test.go"
-        - "_test.go~"
-      waitMillisecond: 1000 # default 100

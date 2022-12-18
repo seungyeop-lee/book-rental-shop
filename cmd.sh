@@ -12,7 +12,6 @@ function runCommand() {
   elif [ "$1" = "up" ]; then
     (cd spring_dev && bash cmd.sh build)
     (cd react_dev && bash cmd.sh build)
-    (cd go_dev && bash cmd.sh build)
     (cd $docker_compose_dir && docker compose up -d --build)
 
   # down
