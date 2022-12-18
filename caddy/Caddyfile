@@ -6,11 +6,11 @@ localhost {
     }
     redir /spring-dev /spring-dev/
 
-    route /react-dev/* {
-        uri strip_prefix /react-dev
-        reverse_proxy react_dev:80
+    route /backoffice/* {
+        uri strip_prefix /backoffice
+        reverse_proxy frontend_backoffice:80
     }
-    redir /react-dev /react-dev/
+    redir /backoffice /backoffice/
 }
 
 # 개발 서버 배포 용 (HTTP)
@@ -21,9 +21,9 @@ http:// {
     }
     redir /spring-dev /spring-dev/
 
-    route /react-dev/* {
-        uri strip_prefix /react-dev
-        reverse_proxy react_dev:80
+    route /backoffice/* {
+        uri strip_prefix /backoffice
+        reverse_proxy frontend_backoffice:80
     }
-    redir /react-dev /react-dev/
+    redir /backoffice /backoffice/
 }

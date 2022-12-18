@@ -1,8 +1,8 @@
 #!/bin/bash
 
 commands=$*
-docker_compose_dir="../docker-compose"
-service_name="react_dev"
+docker_compose_dir="../../docker-compose"
+service_name="frontend_backoffice"
 
 function runCommand() {
   # init

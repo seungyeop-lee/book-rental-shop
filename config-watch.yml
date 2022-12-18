@@ -19,18 +19,18 @@ watchTargets:
         - "spring_dev/src/main/generated"
       waitMillisecond: 1000
   # react
-  - path: 'react_dev'
+  - path: 'frontend/backoffice'
     lifeCycle:
       onStartWatch:
         - 'bash cmd.sh watch'
     option:
       excludeDir:
-        - "react_dev"
+        - "frontend/backoffice"
       waitMillisecond: 1000 # default 100
-  - path: 'react_dev/dist'
+  - path: 'frontend/backoffice/dist'
     lifeCycle:
       onChange:
-        - dir: "react_dev"
+        - dir: "frontend/backoffice"
           cmd: "bash cmd.sh update"
     option:
       waitMillisecond: 1000 # default 100

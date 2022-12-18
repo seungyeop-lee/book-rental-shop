@@ -1,13 +1,13 @@
 {
-  "name": "react_dev",
+  "name": "backoffice",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build --base /react-dev/",
+    "build": "tsc && vite build --base /backoffice/",
     "preview": "vite preview",
-    "watch-build": "vite build --watch --base /react-dev/"
+    "watch-build": "vite build --watch --base /backoffice/"
   },
   "dependencies": {
     "react": "^18.2.0",
