@@ -1,4 +1,4 @@
-package com.github.seungyeop_lee.book_rental_shop.backoffice.book.controller;
+package com.github.seungyeop_lee.book_rental_shop.backoffice.book.adaptor.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.seungyeop_lee.book_rental_shop.backoffice.book.service.BookService;
@@ -24,8 +24,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(BookController.class)
-class BookControllerTest {
+@WebMvcTest(BookRestController.class)
+class BookRestControllerTest {
     @Autowired
     private MockMvc mockMvc;
 

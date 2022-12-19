@@ -1,4 +1,4 @@
-package com.github.seungyeop_lee.book_rental_shop.backoffice.book.controller;
+package com.github.seungyeop_lee.book_rental_shop.backoffice.book.adaptor.web;
 
 import com.github.seungyeop_lee.book_rental_shop.backoffice.book.service.BookService;
 import com.github.seungyeop_lee.book_rental_shop.backoffice.book.service.param.BookCreateParameter;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("book")
 @RequiredArgsConstructor
-public class BookController {
+public class BookRestController {
 
     private final BookService bookService;
 
