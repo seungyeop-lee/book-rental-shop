@@ -1,31 +1,18 @@
 package com.github.seungyeop_lee.book_rental_shop.backoffice.book.domain;
 
-import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Getter
-@NoArgsConstructor
-@Entity
-@Table(name = "BOOK")
 public class Book {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "BOOK_ID")
-    protected Long id;
+    private final BookId id;
+    private final String title;
+    private final String isbn;
 
-    protected String title;
-
-    @Column(unique = true)
-    protected String isbn;
-
-    public Book(String title, String isbn) {
+    @Builder
+    public Book(BookId id, String title, String isbn) {
+        this.id = id;
         this.title = title;
         this.isbn = isbn;
-    }
-
-    public void update(Book book) {
-        this.title = book.title;
-        this.isbn = book.isbn;
     }
 }

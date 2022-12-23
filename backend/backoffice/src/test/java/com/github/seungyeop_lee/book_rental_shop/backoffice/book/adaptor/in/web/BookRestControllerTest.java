@@ -1,10 +1,12 @@
-package com.github.seungyeop_lee.book_rental_shop.backoffice.book.adaptor.web;
+package com.github.seungyeop_lee.book_rental_shop.backoffice.book.adaptor.in.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.seungyeop_lee.book_rental_shop.backoffice.book.service.BookService;
-import com.github.seungyeop_lee.book_rental_shop.backoffice.book.service.param.BookCreateParameter;
-import com.github.seungyeop_lee.book_rental_shop.backoffice.book.service.param.BookUpdateParameter;
-import com.github.seungyeop_lee.book_rental_shop.backoffice.book.service.result.BookReadResult;
+import com.github.seungyeop_lee.book_rental_shop.backoffice.book.adaptor.in.web.dto.BookReadResponse;
+import com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.port.in.BookUseCase;
+import com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.port.in.param.BookCreateParameter;
+import com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.port.in.param.BookUpdateParameter;
+import com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.port.in.result.BookReadResult;
+import com.github.seungyeop_lee.book_rental_shop.backoffice.book.domain.BookId;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +23,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(BookRestController.class)
@@ -33,7 +34,7 @@ class BookRestControllerTest {
     private ObjectMapper objectMapper;
 
     @MockBean
-    private BookService bookService;
+    private BookUseCase bookUsecase;
 
     @DisplayName("[POST] 책 등록")
     @Test
@@ -43,7 +44,8 @@ class BookRestControllerTest {
             setTitle("a");
             setIsbn("b");
         }};
-        when(bookService.registerBook(createParam)).thenReturn(1L);
+        BookId expectBookId = new BookId(1L);
+        when(bookUsecase.registerBook(createParam)).thenReturn(expectBookId);
 
         //when
         MockHttpServletRequestBuilder request = post("/book")
@@ -54,25 +56,28 @@ class BookRestControllerTest {
         ResultActions perform = mockMvc.perform(request);
 
         //then
-        perform.andExpect(status().isCreated())
-                .andExpect(content().string("1"))
-                .andDo(print());
+        MvcResult mvcResult = perform.andExpect(status().isCreated())
+                .andDo(print())
+                .andReturn();
+
+        BookId result = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), BookId.class);
+        assertThat(result).isEqualTo(expectBookId);
     }
 
     @DisplayName("[GET] 책 조회")
     @Test
     void readBook() throws Exception {
         //given
-        Long bookId = 100L;
+        BookId bookId = new BookId(100L);
         BookReadResult readResultExpect = new BookReadResult() {{
             setId(bookId);
             setTitle("a");
             setIsbn("b");
         }};
-        when(bookService.readBook(bookId)).thenReturn(readResultExpect);
+        when(bookUsecase.readBook(bookId)).thenReturn(readResultExpect);
 
         //when
-        MockHttpServletRequestBuilder request = get("/book/" + bookId)
+        MockHttpServletRequestBuilder request = get("/book/" + bookId.getId())
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .characterEncoding("UTF-8");
@@ -83,25 +88,25 @@ class BookRestControllerTest {
                 .andDo(print())
                 .andReturn();
 
-        BookReadResult result = objectMapper.readValue(
+        BookReadResponse result = objectMapper.readValue(
                 mvcResult.getResponse().getContentAsString(),
-                BookReadResult.class
+                BookReadResponse.class
         );
-        assertThat(result).isEqualTo(readResultExpect);
+        assertThat(result).isEqualTo(new BookReadResponse(readResultExpect));
     }
 
     @DisplayName("[PUT] 책 정보 수정")
     @Test
     void updateBook() throws Exception {
         //given
-        Long bookId = 200L;
+        BookId bookId = new BookId(200L);
         BookUpdateParameter updateParam = new BookUpdateParameter() {{
             setTitle("c");
             setIsbn("d");
         }};
 
         //when
-        MockHttpServletRequestBuilder request = put("/book/" + bookId)
+        MockHttpServletRequestBuilder request = put("/book/" + bookId.getId())
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .characterEncoding("UTF-8")
@@ -112,17 +117,17 @@ class BookRestControllerTest {
         perform.andExpect(status().isNoContent())
                 .andDo(print());
 
-        verify(bookService).updateBook(bookId, updateParam);
+        verify(bookUsecase).updateBook(bookId, updateParam);
     }
 
     @DisplayName("[DELETE] 책 삭제")
     @Test
     void deleteBook() throws Exception {
         //given
-        Long bookId = 300L;
+        BookId bookId = new BookId(300L);
 
         //when
-        MockHttpServletRequestBuilder request = delete("/book/" + bookId)
+        MockHttpServletRequestBuilder request = delete("/book/" + bookId.getId())
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .characterEncoding("UTF-8");
@@ -132,6 +137,6 @@ class BookRestControllerTest {
         perform.andExpect(status().isNoContent())
                 .andDo(print());
 
-        verify(bookService).deleteBook(bookId);
+        verify(bookUsecase).deleteBook(bookId);
     }
 }

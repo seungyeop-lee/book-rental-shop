@@ -1,10 +1,14 @@
-package com.github.seungyeop_lee.book_rental_shop.backoffice.book.service;
+package com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.service;
 
+import com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.port.in.param.BookCreateParameter;
+import com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.port.in.param.BookUpdateParameter;
+import com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.port.in.result.BookReadResult;
+import com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.port.out.BookDeleter;
+import com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.port.out.BookFinder;
+import com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.port.out.BookSaver;
+import com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.port.out.BookUpdater;
 import com.github.seungyeop_lee.book_rental_shop.backoffice.book.domain.Book;
-import com.github.seungyeop_lee.book_rental_shop.backoffice.book.domain.BookRepository;
-import com.github.seungyeop_lee.book_rental_shop.backoffice.book.service.param.BookCreateParameter;
-import com.github.seungyeop_lee.book_rental_shop.backoffice.book.service.param.BookUpdateParameter;
-import com.github.seungyeop_lee.book_rental_shop.backoffice.book.service.result.BookReadResult;
+import com.github.seungyeop_lee.book_rental_shop.backoffice.book.domain.BookId;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,8 +18,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class BookServiceTest {
@@ -24,7 +27,13 @@ class BookServiceTest {
     private BookService bookService;
 
     @Mock
-    private BookRepository bookRepository;
+    private BookSaver bookSaver;
+    @Mock
+    private BookFinder bookFinder;
+    @Mock
+    private BookUpdater bookUpdater;
+    @Mock
+    private BookDeleter bookDeleter;
 
     @Mock
     private Book book;
@@ -33,12 +42,11 @@ class BookServiceTest {
     @Test
     void registerBook() {
         //given
-        Long expectBookId = 100L;
-        when(book.getId()).thenReturn(expectBookId);
-        when(bookRepository.save(any())).thenReturn(book);
+        BookId expectBookId = new BookId(100L);
+        when(bookSaver.save(any())).thenReturn(expectBookId);
 
         //when
-        Long bookId = bookService.registerBook(new BookCreateParameter() {{
+        BookId bookId = bookService.registerBook(new BookCreateParameter() {{
             setTitle("a");
             setIsbn("abcd1234");
         }});
@@ -51,14 +59,14 @@ class BookServiceTest {
     @Test
     void readBook() {
         //given
-        Long bookId = 100L;
+        BookId bookId = new BookId(100L);
         String title = "a";
         String isbn = "b";
 
         when(book.getId()).thenReturn(bookId);
         when(book.getTitle()).thenReturn(title);
         when(book.getIsbn()).thenReturn(isbn);
-        when(bookRepository.getReferenceById(bookId)).thenReturn(book);
+        when(bookFinder.findById(bookId)).thenReturn(book);
 
         //when
         BookReadResult result = bookService.readBook(bookId);
@@ -73,8 +81,7 @@ class BookServiceTest {
     @Test
     void updateBook() {
         //given
-        Long bookId = 100L;
-        when(bookRepository.getReferenceById(bookId)).thenReturn(book);
+        BookId bookId = new BookId(100L);
 
         //when
         bookService.updateBook(bookId, new BookUpdateParameter() {{
@@ -83,19 +90,19 @@ class BookServiceTest {
         }});
 
         //then
-        verify(book).update(any());
+        verify(bookUpdater).update(eq(bookId), any());
     }
 
     @DisplayName("책 삭제")
     @Test
     void deleteBook() {
         //given
-        Long bookId = 100L;
+        BookId bookId = new BookId(100L);
 
         //when
         bookService.deleteBook(bookId);
 
         //then
-        verify(bookRepository).deleteById(bookId);
+        verify(bookDeleter).deleteById(bookId);
     }
 }
