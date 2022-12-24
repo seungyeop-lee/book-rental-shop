@@ -27,7 +27,7 @@ public class BookRestController {
     @GetMapping("/{bookId}")
     public ResponseEntity<BookReadResponse> readBook(@PathVariable Long bookId) {
         BookReadResult bookReadResult = bookUsecase.readBook(new BookId(bookId));
-        return ResponseEntity.status(HttpStatus.OK).body(new BookReadResponse(bookReadResult));
+        return ResponseEntity.status(HttpStatus.OK).body(BookReadResponse.of(bookReadResult));
     }
 
     @PutMapping("/{bookId}")

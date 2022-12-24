@@ -92,7 +92,7 @@ class BookRestControllerTest {
                 mvcResult.getResponse().getContentAsString(),
                 BookReadResponse.class
         );
-        assertThat(result).isEqualTo(new BookReadResponse(readResultExpect));
+        assertThat(result).isEqualTo(BookReadResponse.of(readResultExpect));
     }
 
     @DisplayName("[PUT] 책 정보 수정")

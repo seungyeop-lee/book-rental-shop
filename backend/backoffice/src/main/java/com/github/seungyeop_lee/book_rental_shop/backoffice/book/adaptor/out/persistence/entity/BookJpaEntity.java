@@ -1,10 +1,12 @@
 package com.github.seungyeop_lee.book_rental_shop.backoffice.book.adaptor.out.persistence.entity;
 
 import com.github.seungyeop_lee.book_rental_shop.backoffice.book.domain.Book;
-import com.github.seungyeop_lee.book_rental_shop.backoffice.book.vo.BookId;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.factory.Mappers;
 
 @Getter
 @NoArgsConstructor
@@ -33,10 +35,14 @@ public class BookJpaEntity {
     }
 
     public Book mapToDomain() {
-        return Book.builder()
-                .id(new BookId(id))
-                .title(title)
-                .isbn(isbn)
-                .build();
+        return Converter.INSTANCE.convert(this);
+    }
+
+    @Mapper
+    interface Converter {
+        Converter INSTANCE = Mappers.getMapper(Converter.class);
+
+        @Mapping(source = "id", target = "id.id")
+        Book convert(BookJpaEntity input);
     }
 }

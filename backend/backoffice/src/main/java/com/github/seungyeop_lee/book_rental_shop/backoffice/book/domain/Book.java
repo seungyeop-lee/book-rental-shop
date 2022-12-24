@@ -13,10 +13,4 @@ public class Book {
     private BookId id;
     private String title;
     private String isbn;
-
-    @Builder
-    public Book(String title, String isbn) {
-        this.title = title;
-        this.isbn = isbn;
-    }
 }

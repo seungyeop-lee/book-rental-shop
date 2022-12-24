@@ -3,6 +3,9 @@ package com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.po
 import com.github.seungyeop_lee.book_rental_shop.backoffice.book.domain.Book;
 import com.github.seungyeop_lee.book_rental_shop.backoffice.book.vo.BookId;
 import lombok.Data;
+import org.mapstruct.Mapper;
+
+import static org.mapstruct.factory.Mappers.getMapper;
 
 @Data
 public class BookReadResult {
@@ -11,10 +14,13 @@ public class BookReadResult {
     private String isbn;
 
     public static BookReadResult of(Book book) {
-        BookReadResult result = new BookReadResult();
-        result.setId(book.getId());
-        result.setTitle(book.getTitle());
-        result.setIsbn(book.getIsbn());
-        return result;
+        return Convert.INSTANCE.convert(book);
+    }
+
+    @Mapper
+    interface Convert {
+        Convert INSTANCE = getMapper(Convert.class);
+
+        BookReadResult convert(Book input);
     }
 }
