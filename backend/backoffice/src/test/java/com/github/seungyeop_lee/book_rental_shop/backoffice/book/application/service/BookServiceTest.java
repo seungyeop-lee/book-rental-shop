@@ -8,7 +8,7 @@ import com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.por
 import com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.port.out.BookSaver;
 import com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.port.out.BookUpdater;
 import com.github.seungyeop_lee.book_rental_shop.backoffice.book.domain.Book;
-import com.github.seungyeop_lee.book_rental_shop.backoffice.book.domain.BookId;
+import com.github.seungyeop_lee.book_rental_shop.backoffice.book.vo.BookId;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

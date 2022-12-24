@@ -1,17 +1,21 @@
 package com.github.seungyeop_lee.book_rental_shop.backoffice.book.domain;
 
+import com.github.seungyeop_lee.book_rental_shop.backoffice.book.vo.BookId;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
 @Getter
+@Builder
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Book {
-    private final BookId id;
-    private final String title;
-    private final String isbn;
+    private BookId id;
+    private String title;
+    private String isbn;
 
     @Builder
-    public Book(BookId id, String title, String isbn) {
-        this.id = id;
+    public Book(String title, String isbn) {
         this.title = title;
         this.isbn = isbn;
     }

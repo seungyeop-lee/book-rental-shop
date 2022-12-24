@@ -1,7 +1,7 @@
 package com.github.seungyeop_lee.book_rental_shop.backoffice.book.adaptor.out.persistence.entity;
 
 import com.github.seungyeop_lee.book_rental_shop.backoffice.book.domain.Book;
-import com.github.seungyeop_lee.book_rental_shop.backoffice.book.domain.BookId;
+import com.github.seungyeop_lee.book_rental_shop.backoffice.book.vo.BookId;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,11 +32,11 @@ public class BookJpaEntity {
         this.isbn = book.getIsbn();
     }
 
-    public Book mapToDomainEntity() {
-        return new Book(
-                new BookId(this.id),
-                this.title,
-                this.isbn
-        );
+    public Book mapToDomain() {
+        return Book.builder()
+                .id(new BookId(id))
+                .title(title)
+                .isbn(isbn)
+                .build();
     }
 }

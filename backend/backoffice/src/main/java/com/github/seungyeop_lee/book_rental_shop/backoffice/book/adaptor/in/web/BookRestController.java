@@ -5,7 +5,7 @@ import com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.por
 import com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.port.in.dto.BookCreateCommand;
 import com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.port.in.dto.BookReadResult;
 import com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.port.in.dto.BookUpdateCommand;
-import com.github.seungyeop_lee.book_rental_shop.backoffice.book.domain.BookId;
+import com.github.seungyeop_lee.book_rental_shop.backoffice.book.vo.BookId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

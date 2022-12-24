@@ -7,11 +7,11 @@ import com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.por
 import com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.port.out.BookSaver;
 import com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.port.out.BookUpdater;
 import com.github.seungyeop_lee.book_rental_shop.backoffice.book.domain.Book;
-import com.github.seungyeop_lee.book_rental_shop.backoffice.book.domain.BookId;
+import com.github.seungyeop_lee.book_rental_shop.backoffice.book.vo.BookId;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
-@Component
+@Repository
 @RequiredArgsConstructor
 public class BookPersistenceAdaptor implements BookSaver, BookFinder, BookUpdater, BookDeleter {
 
@@ -26,7 +26,7 @@ public class BookPersistenceAdaptor implements BookSaver, BookFinder, BookUpdate
     @Override
     public Book findById(BookId bookId) {
         BookJpaEntity found = bookJpaRepository.getReferenceById(bookId.getId());
-        return found.mapToDomainEntity();
+        return found.mapToDomain();
     }
 
     @Override

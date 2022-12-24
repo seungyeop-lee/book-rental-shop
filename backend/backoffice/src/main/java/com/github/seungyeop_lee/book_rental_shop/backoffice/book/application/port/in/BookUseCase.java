@@ -3,7 +3,7 @@ package com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.po
 import com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.port.in.dto.BookCreateCommand;
 import com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.port.in.dto.BookReadResult;
 import com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.port.in.dto.BookUpdateCommand;
-import com.github.seungyeop_lee.book_rental_shop.backoffice.book.domain.BookId;
+import com.github.seungyeop_lee.book_rental_shop.backoffice.book.vo.BookId;
 
 public interface BookUseCase {
     BookId registerBook(BookCreateCommand param);

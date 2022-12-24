@@ -9,7 +9,7 @@ import com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.por
 import com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.port.out.BookSaver;
 import com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.port.out.BookUpdater;
 import com.github.seungyeop_lee.book_rental_shop.backoffice.book.domain.Book;
-import com.github.seungyeop_lee.book_rental_shop.backoffice.book.domain.BookId;
+import com.github.seungyeop_lee.book_rental_shop.backoffice.book.vo.BookId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
