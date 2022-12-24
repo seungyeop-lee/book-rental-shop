@@ -3,9 +3,9 @@ package com.github.seungyeop_lee.book_rental_shop.backoffice.book.adaptor.in.web
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.seungyeop_lee.book_rental_shop.backoffice.book.adaptor.in.web.dto.BookReadResponse;
 import com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.port.in.BookUseCase;
-import com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.port.in.param.BookCreateParameter;
-import com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.port.in.param.BookUpdateParameter;
-import com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.port.in.result.BookReadResult;
+import com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.port.in.dto.BookCreateCommand;
+import com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.port.in.dto.BookReadResult;
+import com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.port.in.dto.BookUpdateCommand;
 import com.github.seungyeop_lee.book_rental_shop.backoffice.book.domain.BookId;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -40,7 +40,7 @@ class BookRestControllerTest {
     @Test
     void registerBook() throws Exception {
         //given
-        BookCreateParameter createParam = new BookCreateParameter() {{
+        BookCreateCommand createParam = new BookCreateCommand() {{
             setTitle("a");
             setIsbn("b");
         }};
@@ -100,7 +100,7 @@ class BookRestControllerTest {
     void updateBook() throws Exception {
         //given
         BookId bookId = new BookId(200L);
-        BookUpdateParameter updateParam = new BookUpdateParameter() {{
+        BookUpdateCommand updateParam = new BookUpdateCommand() {{
             setTitle("c");
             setIsbn("d");
         }};

@@ -1,6 +1,6 @@
 package com.github.seungyeop_lee.book_rental_shop.backoffice.book.adaptor.in.web.dto;
 
-import com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.port.in.result.BookReadResult;
+import com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.port.in.dto.BookReadResult;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

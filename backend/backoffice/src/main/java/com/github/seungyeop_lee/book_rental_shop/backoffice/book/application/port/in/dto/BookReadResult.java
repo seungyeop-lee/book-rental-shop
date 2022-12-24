@@ -1,4 +1,4 @@
-package com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.port.in.result;
+package com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.port.in.dto;
 
 import com.github.seungyeop_lee.book_rental_shop.backoffice.book.domain.Book;
 import com.github.seungyeop_lee.book_rental_shop.backoffice.book.domain.BookId;

@@ -1,10 +1,10 @@
-package com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.port.in.param;
+package com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.port.in.dto;
 
 import com.github.seungyeop_lee.book_rental_shop.backoffice.book.domain.Book;
 import lombok.Data;
 
 @Data
-public class BookCreateParameter {
+public class BookUpdateCommand {
     private String title;
     private String isbn;
 

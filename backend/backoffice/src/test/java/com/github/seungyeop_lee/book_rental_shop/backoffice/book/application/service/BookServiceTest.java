@@ -1,8 +1,8 @@
 package com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.service;
 
-import com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.port.in.param.BookCreateParameter;
-import com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.port.in.param.BookUpdateParameter;
-import com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.port.in.result.BookReadResult;
+import com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.port.in.dto.BookCreateCommand;
+import com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.port.in.dto.BookReadResult;
+import com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.port.in.dto.BookUpdateCommand;
 import com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.port.out.BookDeleter;
 import com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.port.out.BookFinder;
 import com.github.seungyeop_lee.book_rental_shop.backoffice.book.application.port.out.BookSaver;
@@ -46,7 +46,7 @@ class BookServiceTest {
         when(bookSaver.save(any())).thenReturn(expectBookId);
 
         //when
-        BookId bookId = bookService.registerBook(new BookCreateParameter() {{
+        BookId bookId = bookService.registerBook(new BookCreateCommand() {{
             setTitle("a");
             setIsbn("abcd1234");
         }});
@@ -84,7 +84,7 @@ class BookServiceTest {
         BookId bookId = new BookId(100L);
 
         //when
-        bookService.updateBook(bookId, new BookUpdateParameter() {{
+        bookService.updateBook(bookId, new BookUpdateCommand() {{
             setTitle("b");
             setIsbn("bcde2345");
         }});
