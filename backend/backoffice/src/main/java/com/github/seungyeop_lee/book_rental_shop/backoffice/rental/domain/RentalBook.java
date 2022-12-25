@@ -1,25 +1,35 @@
 package com.github.seungyeop_lee.book_rental_shop.backoffice.rental.domain;
 
-import jakarta.persistence.*;
+import com.github.seungyeop_lee.book_rental_shop.backoffice.book.vo.BookId;
+import com.github.seungyeop_lee.book_rental_shop.backoffice.rental.vo.RentalBookId;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 
 import java.time.OffsetDateTime;
 
 @Getter
-@Entity
-@Table(name = "RENTAL_BOOK")
+@Builder
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class RentalBook {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "RENTAL_BOOK_ID")
-    protected Long id;
+    private RentalBookId id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "RENTAL_ID")
-    protected Rental rental;
+    private final BookId bookId;
 
-    protected Long BookId;
+    private OffsetDateTime rentalDateTime;
 
+    private OffsetDateTime rentalReturnDateTime;
 
-    protected OffsetDateTime rentalDateTime;
+    public RentalBook(BookId bookId) {
+        this.bookId = bookId;
+    }
+
+    public void rentBook(OffsetDateTime rentalDateTime) {
+        this.rentalDateTime = rentalDateTime;
+    }
+
+    public void returnBook(OffsetDateTime returnDateTime) {
+        this.rentalReturnDateTime = returnDateTime;
+    }
 }
