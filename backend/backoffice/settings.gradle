@@ -13,4 +13,5 @@ include 'context:rental:application'
 include 'context:rental:adaptor'
 
 include 'runner:book-manager'
+include 'runner:rental-manager'
 

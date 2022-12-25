@@ -1,0 +1,5 @@
+dependencies {
+    implementation project(':context:rental:vo')
+    implementation project(':context:rental:domain')
+    implementation project(':context:rental:application')
+}
