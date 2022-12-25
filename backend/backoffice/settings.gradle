@@ -1,0 +1,23 @@
+rootProject.name = 'backoffice'
+
+// book
+include 'context:book:domain'
+findProject(':context:book:domain')?.name = 'book-domain'
+include 'context:book:application'
+findProject(':context:book:application')?.name = 'book-application'
+include 'context:book:adaptor'
+findProject(':context:book:adaptor')?.name = 'book-adaptor'
+
+// rental
+include 'context:rental:domain'
+findProject('context::rental:domain')?.name = 'rental-domain'
+include 'context:rental:application'
+findProject('context::rental:application')?.name = 'rental-application'
+include 'context:rental:adapter'
+findProject('context::rental:adapter')?.name = 'rental-adapter'
+
+// runner
+include 'runner:book-manager'
+findProject(':runner:book-manager')?.name = 'runner-book-manager'
+include 'runner:rental-manager'
+findProject(':runner:rental-manager')?.name = 'runner-rental-manager'
