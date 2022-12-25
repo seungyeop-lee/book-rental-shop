@@ -1,22 +1,5 @@
-plugins {
-    id 'java'
-}
-
-group 'com.github.seungyeop-lee.book-rental-shop.backoffice.book'
-version 'unspecified'
-
-repositories {
-    mavenCentral()
-}
-
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
-
-    implementation project(':context:book:application')
     implementation project(':context:book:vo')
-}
-
-test {
-    useJUnitPlatform()
+    implementation project(':context:book:domain')
+    implementation project(':context:book:application')
 }

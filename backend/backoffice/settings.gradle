@@ -10,8 +10,7 @@ include 'context:book:adaptor'
 include 'context:rental:vo'
 include 'context:rental:domain'
 include 'context:rental:application'
-include 'context:rental:adapter'
+include 'context:rental:adaptor'
 
-// runner
 include 'runner:book-manager'
-include 'runner:rental-manager'
+

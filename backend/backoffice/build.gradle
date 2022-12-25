@@ -1,0 +1,99 @@
+// 순서 지킬 것! plugins -> subprojects -> allprojects -> custom
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.0.1'
+    id 'io.spring.dependency-management' version '1.1.0'
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+}
+
+allprojects {
+    group = 'com.github.seungyeop-lee.book-rental-shop'
+    version = '0.0.1-SNAPSHOT'
+    sourceCompatibility = '17'
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
+
+        // mapstruct
+        implementation 'org.mapstruct:mapstruct:1.5.3.Final'
+        annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
+        annotationProcessor "org.projectlombok:lombok-mapstruct-binding:0.2.0"
+    }
+
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
+}
+
+getSubprojects().each { subproject ->
+    if (subproject.path.endsWith(':vo')) {
+        project(subproject.path) {
+            bootJar {
+                enabled = false
+            }
+            jar {
+                enabled = true
+            }
+        }
+    }
+
+    if (subproject.path.endsWith(':domain')) {
+        project(subproject.path) {
+            bootJar {
+                enabled = false
+            }
+            jar {
+                enabled = true
+            }
+        }
+    }
+
+    if (subproject.path.endsWith(':application')) {
+        project(subproject.path) {
+            bootJar {
+                enabled = false
+            }
+            jar {
+                enabled = true
+            }
+            dependencies {
+                implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+            }
+        }
+    }
+
+    if (subproject.path.endsWith(':adaptor')) {
+        project(subproject.path) {
+            bootJar {
+                enabled = false
+            }
+            jar {
+                enabled = true
+            }
+            dependencies {
+                implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+                runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+                runtimeOnly 'com.h2database:h2'
+
+                implementation "com.querydsl:querydsl-jpa:${dependencyManagement.importedProperties['querydsl.version']}:jakarta"
+                annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jakarta"
+                annotationProcessor 'jakarta.persistence:jakarta.persistence-api'
+                annotationProcessor 'jakarta.annotation:jakarta.annotation-api'
+            }
+        }
+    }
+}

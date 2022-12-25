@@ -4,5 +4,4 @@ use (
 	./context/member/domain
 	./context/member/application
 	./context/member/adaptor
-	./runner/member-manager
 )
