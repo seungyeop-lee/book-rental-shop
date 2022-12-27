@@ -19,17 +19,23 @@ public class RentalBook {
 
     private OffsetDateTime rentalDateTime;
 
-    private OffsetDateTime rentalReturnDateTime;
+    private OffsetDateTime returnDateTime;
 
     public RentalBook(BookId bookId) {
         this.bookId = bookId;
     }
 
     public void rentBook(OffsetDateTime rentalDateTime) {
+        if (rentalDateTime == null) {
+            throw new RentalException.InvalidRentalDateTime("rentalDateTime is null");
+        }
         this.rentalDateTime = rentalDateTime;
     }
 
     public void returnBook(OffsetDateTime returnDateTime) {
-        this.rentalReturnDateTime = returnDateTime;
+        if (returnDateTime == null) {
+            throw new RentalException.InvalidReturnDateTime("returnDateTime is null");
+        }
+        this.returnDateTime = returnDateTime;
     }
 }

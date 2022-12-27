@@ -28,6 +28,10 @@ public class Rental {
     }
 
     public void rentBook(List<BookId> bookIds, OffsetDateTime rentalDateTime) {
+        if (bookIds == null || bookIds.isEmpty()) {
+            throw new RentalException.InvalidBookIdList("rent book Ids is null");
+        }
+
         for (BookId bookId : bookIds) {
             RentalBook rentalBook = new RentalBook(bookId);
             rentalBook.rentBook(rentalDateTime);
@@ -36,6 +40,10 @@ public class Rental {
     }
 
     public void returnBook(List<BookId> bookIds, OffsetDateTime rentalReturnDateTime) {
+        if (bookIds == null || bookIds.isEmpty()) {
+            throw new RentalException.InvalidBookIdList("return book Ids is null");
+        }
+
         for (BookId bookId : bookIds) {
             for (RentalBook rentalBook : rentalBookList) {
                 if (rentalBook.getBookId().equals(bookId)) {

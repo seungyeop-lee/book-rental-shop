@@ -26,6 +26,7 @@ allprojects {
 
         compileOnly 'org.projectlombok:lombok'
         annotationProcessor 'org.projectlombok:lombok'
+        testCompileOnly 'org.projectlombok:lombok'
 
         // mapstruct
         implementation 'org.mapstruct:mapstruct:1.5.3.Final'
