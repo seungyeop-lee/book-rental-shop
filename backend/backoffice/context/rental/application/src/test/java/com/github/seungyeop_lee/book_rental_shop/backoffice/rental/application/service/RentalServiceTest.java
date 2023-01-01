@@ -18,6 +18,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -45,11 +46,15 @@ class RentalServiceTest {
         rentalCommand.setBookIds(bookIds);
         rentalCommand.setMemberId(memberId);
 
+        RentalId expectRentalId = new RentalId(100L);
+        when(rentalSaver.save(any(Rental.class))).thenReturn(expectRentalId);
+
         //when
-        rentalService.rentalBook(rentalCommand);
+        RentalId savedRentalId = rentalService.rentalBook(rentalCommand);
 
         //then
         verify(rentalSaver).save(any(Rental.class));
+        assertThat(savedRentalId).isEqualTo(expectRentalId);
     }
 
     @DisplayName("책 반납")

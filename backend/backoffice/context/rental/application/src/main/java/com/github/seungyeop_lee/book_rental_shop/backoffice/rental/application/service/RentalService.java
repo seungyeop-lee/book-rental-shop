@@ -7,6 +7,7 @@ import com.github.seungyeop_lee.book_rental_shop.backoffice.rental.application.p
 import com.github.seungyeop_lee.book_rental_shop.backoffice.rental.application.port.out.RentalSaver;
 import com.github.seungyeop_lee.book_rental_shop.backoffice.rental.application.port.out.RentalUpdater;
 import com.github.seungyeop_lee.book_rental_shop.backoffice.rental.domain.Rental;
+import com.github.seungyeop_lee.book_rental_shop.backoffice.rental.vo.RentalId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,10 +22,10 @@ public class RentalService implements RentalUseCase {
     private final RentalUpdater rentalUpdater;
 
     @Override
-    public void rentalBook(RentalCommand rentalCommand) {
+    public RentalId rentalBook(RentalCommand rentalCommand) {
         Rental rental = new Rental(rentalCommand.getMemberId());
         rental.rentBook(rentalCommand.getBookIds(), OffsetDateTime.now());
-        rentalSaver.save(rental);
+        return rentalSaver.save(rental);
     }
 
     @Override

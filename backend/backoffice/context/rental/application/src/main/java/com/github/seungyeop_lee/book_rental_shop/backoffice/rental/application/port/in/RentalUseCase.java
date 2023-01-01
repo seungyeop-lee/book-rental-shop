@@ -2,9 +2,10 @@ package com.github.seungyeop_lee.book_rental_shop.backoffice.rental.application.
 
 import com.github.seungyeop_lee.book_rental_shop.backoffice.rental.application.port.in.dto.RentalCommand;
 import com.github.seungyeop_lee.book_rental_shop.backoffice.rental.application.port.in.dto.ReturnCommand;
+import com.github.seungyeop_lee.book_rental_shop.backoffice.rental.vo.RentalId;
 
 public interface RentalUseCase {
-    void rentalBook(RentalCommand rentalCommand);
+    RentalId rentalBook(RentalCommand rentalCommand);
 
     void returnBook(ReturnCommand returnCommand);
 }
