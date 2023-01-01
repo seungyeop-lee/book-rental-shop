@@ -61,9 +61,15 @@ function runCommand() {
   # member-manager
   # build
   elif [ "$1" = "build-member-manager" ]; then
+    # context/member의 하위 폴더에서 전부 go generate 실행
+    for d in ./context/member/*/ ; do
+      (cd "$d" && go generate ./...)
+    done
+    # runner/member-manager에서 go generate 실행
+    (cd runner/member-manager && go generate ./...)
+
     # gcflags를 이용해 컴파일러 최적화 및 인라인 비활성화
     # => 빠른 빌드를 위해 옵션 추가 (go tool compile -help 참조)
-    (cd context/member/application && go generate ./...)
     (cd runner/member-manager && GOOS=linux go build -gcflags "all=-N -l" -o build/app)
     status=$?
     if [ $status != 0 ]; then
