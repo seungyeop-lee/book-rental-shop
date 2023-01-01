@@ -7,11 +7,3 @@ use (
 	./context/member/vo
 	./runner/member-manager
 )
-
-replace (
-	github.com/seungyeop-lee/book-rental-shop/backend/backoffice/runner/member-manager v0.0.0 => ./runner/member-manager
-	github.com/seungyeop-lee/book-rental-shop/backend/backoffice/context/member/adaptor v0.0.0 => ./context/member/application
-	github.com/seungyeop-lee/book-rental-shop/backend/backoffice/context/member/application v0.0.0 => ./context/member/application
-	github.com/seungyeop-lee/book-rental-shop/backend/backoffice/context/member/domain v0.0.0 => ./context/member/domain
-	github.com/seungyeop-lee/book-rental-shop/backend/backoffice/context/member/vo v0.0.0 => ./context/member/vo
-)
