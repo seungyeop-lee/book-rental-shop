@@ -26,26 +26,26 @@ public class RentalBookJpaEntity {
 
     protected OffsetDateTime rentalDateTime;
 
-    protected OffsetDateTime rentalReturnDateTime;
+    protected OffsetDateTime returnDateTime;
 
     public RentalBookJpaEntity(RentalBook rentalBook) {
         this.id = rentalBook.getId().getId();
         this.bookId = rentalBook.getBookId().getId();
         this.rentalDateTime = rentalBook.getRentalDateTime();
-        this.rentalReturnDateTime = rentalBook.getRentalReturnDateTime();
+        this.returnDateTime = rentalBook.getReturnDateTime();
     }
 
     public RentalBook toDomain() {
         return RentalBook.builder()
                 .bookId(new BookId(this.bookId))
                 .rentalDateTime(this.rentalDateTime)
-                .rentalReturnDateTime(this.rentalReturnDateTime)
+                .returnDateTime(this.returnDateTime)
                 .build();
     }
 
     public void update(RentalBook rentalBook) {
         this.bookId = rentalBook.getBookId().getId();
         this.rentalDateTime = rentalBook.getRentalDateTime();
-        this.rentalReturnDateTime = rentalBook.getRentalReturnDateTime();
+        this.returnDateTime = rentalBook.getReturnDateTime();
     }
 }

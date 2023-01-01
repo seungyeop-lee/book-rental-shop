@@ -23,9 +23,9 @@ public class RentalPersistenceAdaptor implements RentalSaver, RentalFinder, Rent
     }
 
     @Override
-    public void save(Rental rental) {
-        RentalJpaEntity entity = new RentalJpaEntity(rental);
-        rentalRepository.save(entity);
+    public RentalId save(Rental rental) {
+        RentalJpaEntity saved = rentalRepository.save(new RentalJpaEntity(rental));
+        return new RentalId(saved.getId());
     }
 
     @Override

@@ -5,8 +5,7 @@ import com.github.seungyeop_lee.book_rental_shop.backoffice.rental.domain.Rental
 import com.github.seungyeop_lee.book_rental_shop.backoffice.rental.vo.MemberId;
 import com.github.seungyeop_lee.book_rental_shop.backoffice.rental.vo.RentalId;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 import java.util.Map;
@@ -17,6 +16,8 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @Entity
 @Table(name = "RENTAL")
+@Builder
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class RentalJpaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,12 +30,21 @@ public class RentalJpaEntity {
     protected List<RentalBookJpaEntity> rentalBookList;
 
     public RentalJpaEntity(Rental rental) {
-        this.id = rental.getId().getId();
-        this.memberId = rental.getMemberId().getId();
-        this.rentalBookList = rental.getRentalBookList()
-                .stream()
-                .map(RentalBookJpaEntity::new)
-                .collect(Collectors.toList());
+        if (rental == null) {
+            return;
+        }
+
+        if (rental.getId() != null) {
+            this.id = rental.getId().getId();
+        }
+        if (rental.getMemberId() != null) {
+            this.memberId = rental.getMemberId().getId();
+        }
+        if (rental.getRentalBookList() != null) {
+            this.rentalBookList = rental.getRentalBookList().stream()
+                    .map(RentalBookJpaEntity::new)
+                    .collect(Collectors.toList());
+        }
     }
 
     public Rental toDomain() {
