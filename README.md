@@ -5,6 +5,7 @@
 - docker
 - jdk 17+
 - node 18+
+- golang 1.19+
 
 ## 실행법
 

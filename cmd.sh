@@ -7,11 +7,13 @@ function runCommand() {
   # init
   if [ "$1" = "init" ]; then
     (cd frontend/backoffice && bash cmd.sh init)
+    go install github.com/golang/mock/mockgen@v1.6.0
 
   # up
   elif [ "$1" = "up" ]; then
     (cd backend/backoffice && bash cmd.sh build-book-manager)
     (cd backend/backoffice && bash cmd.sh build-rental-manager)
+    (cd backend/backoffice && bash cmd.sh build-member-manager)
     (cd frontend/backoffice && bash cmd.sh build)
     (cd $docker_compose_dir && docker compose up -d --build)
 

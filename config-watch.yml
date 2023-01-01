@@ -78,6 +78,32 @@ watchTargets:
         - "backend/backoffice/runner/rental-manager/src/main/generated"
       waitMillisecond: 1000
 
+  # backend_backoffice_member_manager
+  - path: "backend/backoffice/context/member"
+    lifeCycle:
+      onChange:
+        - dir: "backend/backoffice"
+          cmd: "bash cmd.sh build-member-manager update-member-manager"
+    option:
+      excludeSuffix:
+        - "_test.go"
+        - "_test.go~"
+        - "_mock.go"
+      waitMillisecond: 1000
+  - path: "backend/backoffice/runner/member-manager"
+    lifeCycle:
+      onChange:
+        - dir: "backend/backoffice"
+          cmd: "bash cmd.sh build-member-manager update-member-manager"
+    option:
+      excludeDir:
+        - "backend/backoffice/runner/member-manager/build"
+      excludeSuffix:
+        - "_test.go"
+        - "_test.go~"
+        - "_mock.go"
+      waitMillisecond: 1000
+
   # react
   - path: 'frontend/backoffice'
     lifeCycle:

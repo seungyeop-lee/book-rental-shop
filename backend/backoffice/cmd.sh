@@ -58,6 +58,21 @@ function runCommand() {
   elif [ "$1" = "update-rental-manager" ]; then
       (cd $docker_compose_dir && docker compose up backend_backoffice_rental_manager --build -d)
 
+  # member-manager
+  # build
+  elif [ "$1" = "build-member-manager" ]; then
+    # gcflags를 이용해 컴파일러 최적화 및 인라인 비활성화
+    # => 빠른 빌드를 위해 옵션 추가 (go tool compile -help 참조)
+    (cd context/member/application && go generate ./...)
+    (cd runner/member-manager && GOOS=linux go build -gcflags "all=-N -l" -o build/app)
+    status=$?
+    if [ $status != 0 ]; then
+      exit 1
+    fi
+  # update
+  elif [ "$1" = "update-member-manager" ]; then
+      (cd $docker_compose_dir && docker compose up backend_backoffice_member_manager --build -d)
+
   fi
 }
 

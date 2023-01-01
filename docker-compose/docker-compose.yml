@@ -50,6 +50,13 @@ services:
       - "-Dspring.profiles.active=default"
       - "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
       - "app.jar"
+  backend_backoffice_member_manager:
+    build:
+      context: ../backend/backoffice/runner/member-manager
+      dockerfile: Dockerfile
+    ports:
+      - "8083:8080"
+      - "2345:2345"
   redis:
     build:
       context: ../backend/infra/redis
