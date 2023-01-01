@@ -30,7 +30,7 @@ func (m memberService) RegisterMember(param in.MemberCreateCommand) (vo.MemberId
 }
 
 func (m memberService) ReadMember(id vo.MemberId) (*in.MemberReadResult, error) {
-	found, err := m.finder.FindByID(id)
+	found, err := m.finder.FindById(id)
 	if err != nil {
 		return nil, err
 	}

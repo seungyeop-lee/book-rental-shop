@@ -5,10 +5,10 @@ import (
 	"github.com/seungyeop-lee/book-rental-shop/backend/backoffice/context/member/vo"
 )
 
-//go:generate mockgen -source=./member_persistence.go -destination=./mock/member_persistence_mock.go --build_flags=--mod=mod
+//go:generate mockgen -package=mockOut -source=./member_persistence.go -destination=./mock/member_persistence_mock.go --build_flags=--mod=mod
 
 type MemberFinder interface {
-	FindByID(id vo.MemberId) (*domain.Member, error)
+	FindById(id vo.MemberId) (*domain.Member, error)
 }
 
 type MemberSaver interface {
