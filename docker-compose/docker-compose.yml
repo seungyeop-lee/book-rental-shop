@@ -10,15 +10,34 @@ services:
       - ../caddy/site:/srv
       - ../caddy/data:/data
       - ../caddy/config:/config
-    command: caddy run -watch -config /etc/caddy/Caddyfile
+    command: caddy run --watch --config /etc/caddy/Caddyfile
     restart: on-failure
-  backend_backoffice:
+  backend_backoffice_book_manager:
     build:
-      context: ../backend/backoffice
+      context: ../backend/backoffice/runner/book-manager
       dockerfile: run-bootJar.Dockerfile
     ports:
-      - "8080:8080"
+      - "8081:8080"
       - "5005:5005"
+    working_dir: "/app"
+    entrypoint:
+      - "./wait-for-it.sh"
+      - "mariadb:3306"
+      - "-t"
+      - "0"
+      - "--"
+      - "java"
+      - "-jar"
+      - "-Dspring.profiles.active=default"
+      - "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
+      - "app.jar"
+  backend_backoffice_rental_manager:
+    build:
+      context: ../backend/backoffice/runner/rental-manager
+      dockerfile: run-bootJar.Dockerfile
+    ports:
+      - "8082:8080"
+      - "5006:5005"
     working_dir: "/app"
     entrypoint:
       - "./wait-for-it.sh"
@@ -57,5 +76,5 @@ services:
       context: ../frontend/backoffice
       dockerfile: deploy-dist.Dockerfile
     ports:
-      - "8081:80"
+      - "8080:80"
     restart: unless-stopped

@@ -10,7 +10,8 @@ function runCommand() {
 
   # up
   elif [ "$1" = "up" ]; then
-    (cd backend/backoffice && bash cmd.sh build)
+    (cd backend/backoffice && bash cmd.sh build-book-manager)
+    (cd backend/backoffice && bash cmd.sh build-rental-manager)
     (cd frontend/backoffice && bash cmd.sh build)
     (cd $docker_compose_dir && docker compose up -d --build)
 

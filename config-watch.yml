@@ -8,16 +8,76 @@ global:
     onFinishWatch:
       - "bash cmd.sh down"
 watchTargets:
-  # spring
-  - path: "backend/backoffice/src/main"
+  # backend_backoffice_book_manager
+  - path: "backend/backoffice/context/book"
     lifeCycle:
       onChange:
         - dir: "backend/backoffice"
-          cmd: "bash cmd.sh build update"
+          cmd: "bash cmd.sh build-book-manager update-book-manager"
     option:
       excludeDir:
-        - "backend/backoffice/src/main/generated"
+        - "backend/backoffice/context/book/adaptor/build"
+        - "backend/backoffice/context/book/adaptor/out"
+        - "backend/backoffice/context/book/adaptor/src/test"
+        - "backend/backoffice/context/book/adaptor/src/main/generated"
+        - "backend/backoffice/context/book/application/build"
+        - "backend/backoffice/context/book/application/out"
+        - "backend/backoffice/context/book/application/src/test"
+        - "backend/backoffice/context/book/application/src/main/generated"
+        - "backend/backoffice/context/book/domain/build"
+        - "backend/backoffice/context/book/domain/out"
+        - "backend/backoffice/context/book/domain/src/test"
+        - "backend/backoffice/context/book/domain/src/main/generated"
+        - "backend/backoffice/context/book/vo/build"
+        - "backend/backoffice/context/book/vo/out"
+        - "backend/backoffice/context/book/vo/src/test"
+        - "backend/backoffice/context/book/vo/src/main/generated"
       waitMillisecond: 1000
+  - path: "backend/backoffice/runner/book-manager/src/main"
+    lifeCycle:
+      onChange:
+        - dir: "backend/backoffice"
+          cmd: "bash cmd.sh build-book-manager update-book-manager"
+    option:
+      excludeDir:
+        - "backend/backoffice/runner/book-manager/src/main/generated"
+      waitMillisecond: 1000
+  
+  # backend_backoffice_rental_manager
+  - path: "backend/backoffice/context/rental"
+    lifeCycle:
+      onChange:
+        - dir: "backend/backoffice"
+          cmd: "bash cmd.sh build-rental-manager update-rental-manager"
+    option:
+      excludeDir:
+        - "backend/backoffice/context/rental/adaptor/build"
+        - "backend/backoffice/context/rental/adaptor/out"
+        - "backend/backoffice/context/rental/adaptor/src/test"
+        - "backend/backoffice/context/rental/adaptor/src/main/generated"
+        - "backend/backoffice/context/rental/application/build"
+        - "backend/backoffice/context/rental/application/out"
+        - "backend/backoffice/context/rental/application/src/test"
+        - "backend/backoffice/context/rental/application/src/main/generated"
+        - "backend/backoffice/context/rental/domain/build"
+        - "backend/backoffice/context/rental/domain/out"
+        - "backend/backoffice/context/rental/domain/src/test"
+        - "backend/backoffice/context/rental/domain/src/main/generated"
+        - "backend/backoffice/context/rental/vo/build"
+        - "backend/backoffice/context/rental/vo/out"
+        - "backend/backoffice/context/rental/vo/src/test"
+        - "backend/backoffice/context/rental/vo/src/main/generated"
+      waitMillisecond: 1000
+  - path: "backend/backoffice/runner/rental-manager/src/main"
+    lifeCycle:
+      onChange:
+        - dir: "backend/backoffice"
+          cmd: "bash cmd.sh build-rental-manager update-rental-manager"
+    option:
+      excludeDir:
+        - "backend/backoffice/runner/rental-manager/src/main/generated"
+      waitMillisecond: 1000
+
   # react
   - path: 'frontend/backoffice'
     lifeCycle:

@@ -98,4 +98,12 @@ getSubprojects().each { subproject ->
             }
         }
     }
+
+    if (subproject.path.startsWith(':runner')) {
+        project(subproject.path) {
+            jar {
+                enabled = false
+            }
+        }
+    }
 }
