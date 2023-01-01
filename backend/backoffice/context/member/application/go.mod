@@ -8,8 +8,3 @@ require (
 )
 
 require github.com/golang/mock v1.6.0 // indirect
-
-replace (
-	github.com/seungyeop-lee/book-rental-shop/backend/backoffice/context/member/domain => ../domain
-	github.com/seungyeop-lee/book-rental-shop/backend/backoffice/context/member/vo => ../vo
-)
