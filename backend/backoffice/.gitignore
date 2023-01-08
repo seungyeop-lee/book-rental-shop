@@ -24,6 +24,7 @@ bin/
 *.ipr
 out/
 !**/application/**/out/
+!**/adaptor/**/out/
 !**/src/main/**/out/
 !**/src/test/**/out/
 
