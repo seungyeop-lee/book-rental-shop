@@ -1,10 +1,22 @@
 # 로컬 환경 용 (HTTPS)
 localhost {
-    route /backoffice/api/* {
-        uri strip_prefix /backoffice/api
-        reverse_proxy backend_backoffice:8080
+    route /backoffice/api/book/* {
+        uri strip_prefix /backoffice/api/book
+        reverse_proxy backend_backoffice_book_manager:8080
     }
-    redir /backoffice/api /backoffice/api/
+    redir /backoffice/api/book /backoffice/api/book/
+
+    route /backoffice/api/rental/* {
+        uri strip_prefix /backoffice/api/rental
+        reverse_proxy backend_backoffice_rental_manager:8080
+    }
+    redir /backoffice/api/rental /backoffice/api/rental/
+
+    route /backoffice/api/member/* {
+        uri strip_prefix /backoffice/api/member
+        reverse_proxy backend_backoffice_member_manager:8080
+    }
+    redir /backoffice/api/member /backoffice/api/member/
 
     route /backoffice/* {
         uri strip_prefix /backoffice
