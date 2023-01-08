@@ -10,7 +10,9 @@ RUN apk add --no-cache build-base
 
 WORKDIR /app
 
-COPY --from=dlv-builder /go/bin/dlv ./
+COPY wait-for ./
+
+COPY --from=dlv-builder /go/bin/dlv /usr/bin/dlv
 
 COPY build/app ./
 
