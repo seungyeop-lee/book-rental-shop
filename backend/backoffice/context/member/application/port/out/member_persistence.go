@@ -12,11 +12,11 @@ type MemberFinder interface {
 }
 
 type MemberSaver interface {
-	Save(member *domain.Member) (vo.MemberId, error)
+	Save(member domain.Member) (vo.MemberId, error)
 }
 
 type MemberUpdater interface {
-	Update(id vo.MemberId, member *domain.Member) error
+	Update(id vo.MemberId, member domain.Member) error
 }
 
 type MemberDeleter interface {

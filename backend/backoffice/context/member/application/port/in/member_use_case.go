@@ -13,8 +13,8 @@ type MemberUseCase interface {
 }
 
 type MemberCreateCommand struct {
-	Name        string
-	PhoneNumber string
+	Name        string `json:"name"`
+	PhoneNumber string `json:"phoneNumber"`
 }
 
 func (c MemberCreateCommand) MapToMember() *domain.Member {
@@ -22,9 +22,9 @@ func (c MemberCreateCommand) MapToMember() *domain.Member {
 }
 
 type MemberReadResult struct {
-	Id          vo.MemberId
-	Name        string
-	PhoneNumber string
+	Id          vo.MemberId `json:"id"`
+	Name        string      `json:"name"`
+	PhoneNumber string      `json:"phoneNumber"`
 }
 
 func NewMemberReadResultByMember(member *domain.Member) *MemberReadResult {
@@ -36,8 +36,8 @@ func NewMemberReadResultByMember(member *domain.Member) *MemberReadResult {
 }
 
 type MemberUpdateCommand struct {
-	Name        string
-	PhoneNumber string
+	Name        string `json:"name"`
+	PhoneNumber string `json:"phoneNumber"`
 }
 
 func (c MemberUpdateCommand) MapToMember() *domain.Member {

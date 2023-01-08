@@ -74,7 +74,7 @@ func (m *MockMemberSaver) EXPECT() *MockMemberSaverMockRecorder {
 }
 
 // Save mocks base method.
-func (m *MockMemberSaver) Save(member *domain.Member) (vo.MemberId, error) {
+func (m *MockMemberSaver) Save(member domain.Member) (vo.MemberId, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Save", member)
 	ret0, _ := ret[0].(vo.MemberId)
@@ -112,7 +112,7 @@ func (m *MockMemberUpdater) EXPECT() *MockMemberUpdaterMockRecorder {
 }
 
 // Update mocks base method.
-func (m *MockMemberUpdater) Update(id vo.MemberId, member *domain.Member) error {
+func (m *MockMemberUpdater) Update(id vo.MemberId, member domain.Member) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Update", id, member)
 	ret0, _ := ret[0].(error)

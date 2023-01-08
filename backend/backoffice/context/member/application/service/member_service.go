@@ -26,7 +26,7 @@ func NewMemberService(finder out.MemberFinder, saver out.MemberSaver, updater ou
 
 func (m memberService) RegisterMember(param in.MemberCreateCommand) (vo.MemberId, error) {
 	member := param.MapToMember()
-	return m.saver.Save(member)
+	return m.saver.Save(*member)
 }
 
 func (m memberService) ReadMember(id vo.MemberId) (*in.MemberReadResult, error) {
@@ -40,7 +40,7 @@ func (m memberService) ReadMember(id vo.MemberId) (*in.MemberReadResult, error) 
 
 func (m memberService) UpdateMember(id vo.MemberId, param in.MemberUpdateCommand) error {
 	member := param.MapToMember()
-	return m.updater.Update(id, member)
+	return m.updater.Update(id, *member)
 }
 
 func (m memberService) DeleteMember(id vo.MemberId) error {
