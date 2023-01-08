@@ -24,7 +24,6 @@ public class BookJpaEntity {
     protected String isbn;
 
     public BookJpaEntity(Book book) {
-        this.id = book.getId().getId();
         this.title = book.getTitle();
         this.isbn = book.getIsbn();
     }
