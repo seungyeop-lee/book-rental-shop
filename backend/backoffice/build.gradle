@@ -88,7 +88,6 @@ getSubprojects().each { subproject ->
             dependencies {
                 implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
-                runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
                 runtimeOnly 'com.h2database:h2'
 
                 implementation "com.querydsl:querydsl-jpa:${dependencyManagement.importedProperties['querydsl.version']}:jakarta"
@@ -103,6 +102,11 @@ getSubprojects().each { subproject ->
         project(subproject.path) {
             jar {
                 enabled = false
+            }
+            dependencies {
+                implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+                runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
             }
         }
     }
