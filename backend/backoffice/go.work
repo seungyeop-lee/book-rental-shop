@@ -1,9 +1,0 @@
-go 1.19
-
-use (
-	./context/member/adaptor
-	./context/member/application
-	./context/member/domain
-	./context/member/vo
-	./runner/member-manager
-)
