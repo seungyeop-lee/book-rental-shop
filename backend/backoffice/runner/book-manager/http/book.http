@@ -1,0 +1,35 @@
+### create
+POST https://localhost/backoffice/api/book/book
+Accept: application/json
+Content-Type: application/json
+
+{
+  "title": "실전에서 바로 쓰는 Next.js",
+  "isbn": "1169210716"
+}
+
+> {%
+    client.global.set("id", response.body.toString().trim());
+%}
+
+### read
+GET https://localhost/backoffice/api/book/book/{{id}}
+
+### read - not found
+GET https://localhost/backoffice/api/book/book/100
+
+### update
+PUT https://localhost/backoffice/api/book/book/{{id}}
+Accept: application/json
+Content-Type: application/json
+
+{
+  "title": "실전에서 바로 쓰는 Next.js - 수정판",
+  "isbn": "1169210716"
+}
+
+### read
+GET https://localhost/backoffice/api/book/book/{{id}}
+
+### delete
+DELETE https://localhost/backoffice/api/book/book/{{id}}
