@@ -6,6 +6,7 @@
 - jdk 17+
 - node 18+
 - golang 1.19+
+  - [gomock](https://github.com/golang/mock)
 
 ## 실행법
 
