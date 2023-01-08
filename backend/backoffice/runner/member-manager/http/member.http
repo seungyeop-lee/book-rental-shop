@@ -1,0 +1,32 @@
+### create
+POST https://localhost/backoffice/api/member/member
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "lsy",
+  "phoneNumber": "012-3456-7890"
+}
+
+> {%
+    client.global.set("id", response.body.toString().trim());
+%}
+
+### read
+GET https://localhost/backoffice/api/member/member/{{id}}
+
+### update
+PUT https://localhost/backoffice/api/member/member/{{id}}
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "lsy2",
+  "phoneNumber": "012-7890-1234"
+}
+
+### read
+GET https://localhost/backoffice/api/member/member/{{id}}
+
+### delete
+DELETE https://localhost/backoffice/api/member/member/{{id}}
