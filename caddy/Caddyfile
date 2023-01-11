@@ -2,36 +2,27 @@
 localhost {
     route /backoffice/api/book/* {
         uri strip_prefix /backoffice/api/book
-        reverse_proxy backend_backoffice_book_manager:8080
+        reverse_proxy backend_backoffice_book_manager:8080 {
+            header_up X-Forwarded-Prefix /backoffice/api/book
+        }
     }
     redir /backoffice/api/book /backoffice/api/book/
 
     route /backoffice/api/rental/* {
         uri strip_prefix /backoffice/api/rental
-        reverse_proxy backend_backoffice_rental_manager:8080
+        reverse_proxy backend_backoffice_rental_manager:8080 {
+            header_up X-Forwarded-Prefix /backoffice/api/rental
+        }
     }
     redir /backoffice/api/rental /backoffice/api/rental/
 
     route /backoffice/api/member/* {
         uri strip_prefix /backoffice/api/member
-        reverse_proxy backend_backoffice_member_manager:8080
+        reverse_proxy backend_backoffice_member_manager:8080 {
+            header_up X-Forwarded-Prefix /backoffice/api/member
+        }
     }
     redir /backoffice/api/member /backoffice/api/member/
-
-    route /backoffice/* {
-        uri strip_prefix /backoffice
-        reverse_proxy frontend_backoffice:80
-    }
-    redir /backoffice /backoffice/
-}
-
-# 개발 서버 배포 용 (HTTP)
-http:// {
-    route /backoffice/api/* {
-        uri strip_prefix /backoffice/api
-        reverse_proxy backend_backoffice:8080
-    }
-    redir /backoffice/api /backoffice/api/
 
     route /backoffice/* {
         uri strip_prefix /backoffice

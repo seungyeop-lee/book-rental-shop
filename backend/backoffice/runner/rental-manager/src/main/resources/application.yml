@@ -24,3 +24,8 @@ spring:
       port: 6379
       password: password
       host: redis
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+server:
+  forward-headers-strategy: framework
