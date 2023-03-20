@@ -11,7 +11,7 @@ function runCommand() {
 
   # update
   elif [ "$1" = "update" ]; then
-    (cd $docker_compose_dir && docker compose up $service_name --build -d)
+    (cd $docker_compose_dir && docker-compose up $service_name --build -d)
 
   # rmi
   elif [ "$1" = "rmi" ]; then

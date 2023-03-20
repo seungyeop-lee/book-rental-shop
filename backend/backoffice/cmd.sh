@@ -44,7 +44,7 @@ function runCommand() {
     fi
   # update
   elif [ "$1" = "update-book-manager" ]; then
-      (cd $docker_compose_dir && docker compose up backend_backoffice_book_manager --build -d)
+      (cd $docker_compose_dir && docker-compose up backend_backoffice_book_manager --build -d)
 
   # rental-manager
   # build
@@ -56,7 +56,7 @@ function runCommand() {
     fi
   # update
   elif [ "$1" = "update-rental-manager" ]; then
-      (cd $docker_compose_dir && docker compose up backend_backoffice_rental_manager --build -d)
+      (cd $docker_compose_dir && docker-compose up backend_backoffice_rental_manager --build -d)
 
   # member-manager
   # build
@@ -77,7 +77,7 @@ function runCommand() {
     fi
   # update
   elif [ "$1" = "update-member-manager" ]; then
-      (cd $docker_compose_dir && docker compose up backend_backoffice_member_manager --build -d)
+      (cd $docker_compose_dir && docker-compose up backend_backoffice_member_manager --build -d)
 
   fi
 }

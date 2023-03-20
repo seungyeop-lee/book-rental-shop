@@ -15,11 +15,11 @@ function runCommand() {
     (cd backend/backoffice && bash cmd.sh build-rental-manager)
     (cd backend/backoffice && bash cmd.sh build-member-manager)
     (cd frontend/backoffice && bash cmd.sh build)
-    (cd $docker_compose_dir && docker compose up -d --build)
+    (cd $docker_compose_dir && docker-compose up -d --build)
 
   # down
   elif [ "$1" = "down" ]; then
-    (cd $docker_compose_dir && docker compose down)
+    (cd $docker_compose_dir && docker-compose down)
 
   # rmi
   elif [ "$1" = "rmi" ]; then
@@ -31,7 +31,7 @@ function runCommand() {
 
   # log
   elif [ "$1" = "log" ]; then
-      (cd $docker_compose_dir && docker compose logs -f)
+      (cd $docker_compose_dir && docker-compose logs -f)
   fi
 }
 
