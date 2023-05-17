@@ -1,7 +1,7 @@
 // 순서 지킬 것! plugins -> subprojects -> allprojects -> custom
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.0.1'
+    id 'org.springframework.boot' version '3.0.6'
     id 'io.spring.dependency-management' version '1.1.0'
 }
 
@@ -108,7 +108,7 @@ getSubprojects().each { subproject ->
 
                 runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 
-                implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2'
+                implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0'
             }
         }
     }
